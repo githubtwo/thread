@@ -52,21 +52,35 @@ package com.example.thread.test;
  */
 
 class Ticket  implements Runnable{ //extends Thread{
-    private int ticket = 100;
+    private int ticket = 1000;
     Object object = new Object();
+    boolean flag = true;
     @Override
     public void run() {
-        while (true){
-            synchronized(object){
-                if(ticket > 0){
+        if(flag){
+            while (true){
+                synchronized(this){
+                    if(ticket > 0){
                   /*  try {
                         Thread.sleep(10);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }*/
-                    System.out.println(Thread.currentThread().getName() + "...sale : " + ticket--);
+                        System.out.println(Thread.currentThread().getName() + "...sale : " + ticket--);
+                    }
                 }
+
             }
+        }else{
+            while (true)
+                 this.show();
+        }
+
+    }
+
+    public synchronized void show(){
+        if(ticket > 0) {
+            System.out.println(Thread.currentThread().getName() + "...show : " + ticket--);
         }
     }
 }
@@ -78,12 +92,20 @@ public class TicketDemo {
 
         Thread t1 = new Thread(t); // 创建一个线程，同时指定运行对象
         Thread t2 = new Thread(t);
-        Thread t3 = new Thread(t);
-        Thread t4 = new Thread(t);
+
         t1.start();
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        t.flag = false;
         t2.start();
-        t3.start();
-        t4.start();
+
+//        Thread t3 = new Thread(t);
+//        Thread t4 = new Thread(t);
+//        t3.start();
+//        t4.start();
 
 //        Ticket t1 = new Ticket();
 //        Ticket t2 = new Ticket();
