@@ -10,4 +10,7 @@ public class ThreadApplication {
         SpringApplication.run(ThreadApplication.class, args);
     }
 
+    public void out(){
+        System.out.println("test merger");
+    }
 }
