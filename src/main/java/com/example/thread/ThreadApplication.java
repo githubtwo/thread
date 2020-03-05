@@ -11,6 +11,6 @@ public class ThreadApplication {
     }
 
     public void out(){
-        System.out.println("test merger");
+        System.out.println("test merger one");
     }
 }
