@@ -1,13 +1,10 @@
 package com.example.thread;
 
-import org.springframework.util.CollectionUtils;
-
 import java.io.*;
 import java.util.*;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class practice {
+public class HashMapTest {
 
     public Object instance = null;
     private static final int _1MB = 1024 * 1024;
@@ -75,13 +72,11 @@ public class practice {
         for(User key : hashMap.values()){
             System.out.println(key);
         }
-        HashMap<Integer,User> map = practice.sort(hashMap);
+        HashMap<Integer,User> map = HashMapTest.sort(hashMap);
         System.out.println(map);
 
 
     }
-
-
 
     /**
      * @describe 已知一个 HashMap<Integer，User>集合， User 有 name（String）和 age（int）属性。请写一个方法实现对

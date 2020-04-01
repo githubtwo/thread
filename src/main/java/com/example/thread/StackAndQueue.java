@@ -1,6 +1,17 @@
 package com.example.thread;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.*;
+
+class ListNode{
+    User val;
+    ListNode next;
+    ListNode(User val){
+        this.val = val;
+    }
+}
 
 /**
  * @program: thread
@@ -10,11 +21,19 @@ import java.util.*;
  */
 public class StackAndQueue {
     public static void main(String[] args) {
+        User user = new User("11",1);
+        ListNode listNode = new ListNode(user);
+        System.out.println(listNode.val);
+
 //        testStack();
 
 //        testQueue();
 
-        queueSimulateStack();
+//        queueSimulateStack();
+
+        testJDKProxy();
+
+
     }
 
     /**
@@ -36,7 +55,7 @@ public class StackAndQueue {
             // 栈空时会抛出 EmptyStackException 异常进入catch块，从而结束打印
             while(stack.peek() != null) {
                 // 出栈栈顶元素，并打印出栈元素
-                System.out.println(stack.peek());
+//                System.out.println(stack.peek());
                 System.out.println(stack.pop());
             }
         } catch(Exception e) {
@@ -96,5 +115,19 @@ public class StackAndQueue {
         }
         System.out.println("出栈");
 
+    }
+
+    public static void testJDKProxy(){
+        List<String> list = new ArrayList<>();
+        List<String> proxy = (List<String>) Proxy.newProxyInstance(list.getClass().getClassLoader(), list.getClass().getInterfaces(),
+                new InvocationHandler() {
+                    @Override
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                        System.out.println("I'm the proxy of ArrayList");
+                        return method.invoke(list,args);
+                    }
+                });
+//        proxy.add("abc");
+        System.out.println(proxy);
     }
 }
