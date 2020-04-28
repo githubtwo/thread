@@ -21,7 +21,6 @@ public class HashMapTest {
         aStr.trim();
         System.out.println("[" + aStr + "," + bStr + "]");
 
-
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(new File("D://obj")));
         objectOutputStream.writeObject(new User("zhansan",14));
         objectOutputStream.close();
@@ -93,12 +92,7 @@ public class HashMapTest {
 //        System.out.println(entrySet);
         // 将 set 集合转为 List 集合，为什么，为了使用工具类的排序方法
         List<Map.Entry<Integer, User>> list2 = new ArrayList<Map.Entry<Integer, User>>(entrySet);
-        List<Map.Entry<Integer, User>> list = list2.stream().sorted(new Comparator<Map.Entry<Integer, User>>() {
-            @Override
-            public int compare(Map.Entry<Integer, User> o1, Map.Entry<Integer, User> o2) {
-                return o1.getValue().getAge() - o2.getValue().getAge();
-            }
-        }).collect(Collectors.toList());
+        List<Map.Entry<Integer, User>> list = list2.stream().sorted((o1,o2) -> o1.getValue().getAge() - o2.getValue().getAge()).collect(Collectors.toList());
 //        Collections.sort(list, new Comparator<Map.Entry<Integer, User>>() {
 //            @Override
 //            public int compare(Map.Entry<Integer, User> o1, Map.Entry<Integer, User> o2) {
