@@ -17,7 +17,7 @@ import java.util.concurrent.Semaphore;
 @Slf4j
 public class MapExample {
     private static Map<Integer,Integer> map = new HashMap<>();
-    private static int threadNum = 200;
+    private static int threadNum = 1;
     private static int clientNum = 5000;
 
     public static void main(String[] args) {

@@ -1,9 +1,9 @@
 package com.example.thread;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @program: thread
@@ -11,13 +11,15 @@ import java.io.Serializable;
  * @author: liu yan
  * @create: 2020-03-06 11:39
  */
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
-public class User implements Serializable,Cloneable {
+public class User  {
     private String name;
     private Integer age;
 
     public User(){}
+
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
