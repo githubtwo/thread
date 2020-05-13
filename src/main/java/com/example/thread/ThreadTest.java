@@ -12,7 +12,8 @@ import java.util.List;
 public class ThreadTest {
 
     public static void main(String[] args) {
-
+        ThreadTest threadTest = new ThreadTest();
+        threadTest.turnExecute();
     }
 
     public void turnExecute(){
