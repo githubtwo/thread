@@ -24,7 +24,7 @@ public class JoinDemo {
         Thread t1 = new Thread(d);
         Thread t2 = new Thread(d);
         t1.start();
-//        t1.join();
+        t1.join();
         t2.start();
 
 

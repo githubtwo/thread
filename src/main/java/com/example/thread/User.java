@@ -13,6 +13,7 @@ import java.util.Objects;
  */
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 public class User  {
     private String name;

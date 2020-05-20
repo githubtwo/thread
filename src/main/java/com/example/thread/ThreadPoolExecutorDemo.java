@@ -1,5 +1,8 @@
 package com.example.thread;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 import java.util.concurrent.*;
 
 /**
@@ -10,6 +13,10 @@ import java.util.concurrent.*;
  **/
 public class ThreadPoolExecutorDemo {
     public static void main(String[] args) {
+        Vector<String> vector = new Vector<>();
+        ArrayList<String> list = new ArrayList<>();
+        ThreadLocal<String> threadLocal = new ThreadLocal<>();
+        Thread thread = new Thread();
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
