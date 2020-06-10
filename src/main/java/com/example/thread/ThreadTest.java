@@ -1,5 +1,12 @@
 package com.example.thread;
 
+import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.ParserContext;
+import org.springframework.expression.common.TemplateParserContext;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
@@ -20,6 +27,42 @@ public class ThreadTest {
     }
 
     public static void main(String[] args) {
+        LinkedHashMap<String,String> linkedHashMap = new LinkedHashMap<>();
+        linkedHashMap.put("a","123");
+        linkedHashMap.put("c","aaa");
+        linkedHashMap.put("b","aaa");
+        linkedHashMap.get("a");
+        System.out.println(linkedHashMap);
+
+        TreeMap<String,String> treeMap = new TreeMap<>();
+        treeMap.put("a","123");
+        treeMap.put("c","aaa");
+        treeMap.put("b","aaa");
+        System.out.println(treeMap);
+
+        //将一整个语句直接定义了字符串
+//        String str = "(\"Hello \" + \"World!!!\").substring(6, 9)";
+//        //1定义一个专属的表达式解析工具
+//        ExpressionParser parser = new SpelExpressionParser() ;
+//        //2定义一个表达式处理类
+//        Expression exp = parser.parseExpression(str);
+//        //3进行最终的表达式计算
+//        EvaluationContext context = new StandardEvaluationContext() ;
+//        //4通过表达式进行结果计算
+//        System.out.println(exp.getValue());
+//
+//        System.out.println(str);
+
+        User user = new User();
+        user.setAge(20);
+        user.setName("zhangwei");
+        SpelExpressionParser parser = new SpelExpressionParser();
+        ParserContext context = new TemplateParserContext();//sql注入问题
+        Expression exp = parser.parseExpression("select * from user u where name = '#{name}' and age >= #{age};",context );
+        System.out.println(exp.getValue(user));
+//结果：select * from user u where name = ‘zhangwei’ and age >= 20;
+
+
         ThreadTest threadTest = new ThreadTest();
         String testStr = "ab"+ "c";
         String a = "abc";
@@ -27,33 +70,6 @@ public class ThreadTest {
         threadTest.changeStr(testStr);
         System.out.println(testStr);
 
-
-        String str = "abcdefg";
-        String reverse = "";
-
-        for (int i = 0; i < str.length(); i++) {
-
-            reverse = str.charAt(i) + reverse;
-
-        }
-        System.out.println(reverse);
-
-        HashMap<String,String> map = new HashMap<>();
-        map.put("as","1");
-        map.put("3","3");
-        map.put("8","8");
-        map.put("5","5");
-        map.put("2","2");
-        System.out.println(map);
-        Set<Map.Entry<String, String>> entry = map.entrySet();
-        List<Map.Entry<String,String>> list = new ArrayList<>();
-        list.addAll(entry);
-        Collections.sort(list, new Comparator<Map.Entry<String, String>>() {
-            @Override
-            public int compare(Map.Entry<String, String> o1, Map.Entry<String, String> o2) {
-                return o1.getKey().hashCode() - o2.getKey().hashCode();
-            }
-        });
 
 //        ThreadTest threadTest = new ThreadTest();
 //        threadTest.turnExecute();
